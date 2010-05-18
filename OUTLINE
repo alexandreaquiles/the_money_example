@@ -26,3 +26,14 @@ TDD By Example - The Money Example - Outline
 * Noticed that if two tests fail at once we're sunk
 * Proceeded in spite of the risk
 * Used new functionality in the object under test to reduce coupling between the tests and the code
+
+--Chapter 5
+* Couldn't tackle a big test, so we invented a small test that represented progress
+* Wrote the test by shamelessly duplicating and editing
+* Even worse, made the test work by copying and editing model code wholesale
+* Promised ourselves we wouldn't go home until duplication was gone
+
+--Chapter 6
+* Setpwise moved common code from one class (Dollar) to a superclass (Money)
+* Made a second class (Franc) a subclass also
+Reconciled two implementations equals() before eliminating the redundant one

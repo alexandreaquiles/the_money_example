@@ -1,8 +1,6 @@
 package com.aquiles.alexandre.money;
 
-public class Franc {
-
-	private int amount;
+public class Franc extends Money {
 
 	public Franc(int amount) {
 		this.amount = amount;
@@ -13,10 +11,4 @@ public class Franc {
 		
 	}
 	
-	@Override
-	public boolean equals(Object object) {
-		Franc dollar = (Franc) object;
-		return this.amount == dollar.amount;
-	}
-
 }
