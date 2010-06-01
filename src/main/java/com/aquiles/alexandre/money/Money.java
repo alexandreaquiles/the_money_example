@@ -1,6 +1,6 @@
 package com.aquiles.alexandre.money;
 
-abstract public class Money {
+public class Money {
 	protected int amount;
 	protected String currency;
 	
@@ -12,7 +12,7 @@ abstract public class Money {
 	public boolean equals(Object object) {
 		Money money = (Money) object;
 		return this.amount == money.amount
-		&& getClass().equals(money.getClass());
+		&& currency().equals(money.currency());
 	}
 
 	public static Money dollar(int amount) {
@@ -23,10 +23,17 @@ abstract public class Money {
 		return new Franc(amount, "CHF");
 	}
 
-	abstract public Money times(int amount);
+	public Money times(int multiplier) {
+		return new Money(amount *  multiplier, currency);
+	}
 
 	public String currency() {
 		return currency;
+	}
+	
+	@Override
+	public String toString() {
+		return amount + " " + currency ;
 	}
 
 }
