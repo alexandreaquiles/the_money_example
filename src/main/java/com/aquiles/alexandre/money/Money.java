@@ -9,10 +9,16 @@ public class Money implements Expression {
 		this.currency = currency;
 	}
 	
+	@Override
 	public boolean equals(Object object) {
 		Money money = (Money) object;
 		return this.amount == money.amount
 		&& currency().equals(money.currency());
+	}
+
+	@Override
+	public String toString() {
+		return amount + " " + currency ;
 	}
 
 	static Money dollar(int amount) {
@@ -31,13 +37,8 @@ public class Money implements Expression {
 		return currency;
 	}
 	
-	@Override
-	public String toString() {
-		return amount + " " + currency ;
-	}
-
 	Expression plus(Money addend) {
-		return new Money(amount + addend.amount, currency);
+		return new Sum(this, addend);
 	}
 
 }
