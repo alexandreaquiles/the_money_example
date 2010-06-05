@@ -18,7 +18,7 @@ public class Money implements Expression {
 
 	@Override
 	public String toString() {
-		return amount + " " + currency ;
+		return amount + " " + currency;
 	}
 
 	static Money dollar(int amount) {
@@ -41,7 +41,6 @@ public class Money implements Expression {
 		return new Sum(this, addend);
 	}
 	
-	@Override
 	public Money reduce(Bank bank, String to) {
 		int rate = bank.rate(currency, to);
 		return new Money(amount / rate, to);
