@@ -5,38 +5,38 @@ import junit.framework.TestCase;
 public class MoneyTest extends TestCase {
 	
 	public void testMultiplication(){
-		Money five = Money.dollar(5);
-		assertEquals(Money.dollar(10), five.times(2));
-		assertEquals(Money.dollar(15), five.times(3));
+		Money five = new Dollar(5);
+		assertEquals(new Dollar(10), five.times(2));
+		assertEquals(new Dollar(15), five.times(3));
 	}
 		
 	public void testFrancMultiplication(){
-		Money five = Money.franc(5);
-		assertEquals(Money.franc(10), five.times(2));
-		assertEquals(Money.franc(15), five.times(3));
+		Money five = new Franc(5);
+		assertEquals(new Franc(10), five.times(2));
+		assertEquals(new Franc(15), five.times(3));
 	}
 	
 	public void testEquality(){
-		assertTrue(Money.dollar(5).equals(Money.dollar(5)));
-		assertFalse(Money.dollar(5).equals(Money.dollar(6)));
-		assertFalse(Money.franc(5).equals(Money.dollar(5)));
+		assertTrue(new Dollar(5).equals(new Dollar(5)));
+		assertFalse(new Dollar(5).equals(new Dollar(6)));
+		assertFalse(new Franc(5).equals(new Dollar(5)));
 	}
 	
 	public void testCurrency(){
-		assertEquals("USD", Money.dollar(1).currency());
-		assertEquals("CHF", Money.franc(1).currency());
+		assertEquals("USD", new Dollar(1).currency());
+		assertEquals("CHF", new Franc(1).currency());
 	}
 	
 	public void testSimpleAddition(){
-		Money five = Money.dollar(5); 
+		Money five = new Dollar(5); 
 		Expression sum = five.plus(five);
 		Bank bank = new Bank();
 		Money reduced = bank.reduce(sum, "USD");
-		assertEquals(Money.dollar(10), reduced);
+		assertEquals(new Dollar(10), reduced);
 	}
 	
 	public void testPlusReturnsSum(){
-		Money five = Money.dollar(5);
+		Money five = new Dollar(5);
 		Expression result = five.plus(five);
 		Sum sum = (Sum) result;
 		assertEquals(five, sum.augend);
@@ -44,23 +44,23 @@ public class MoneyTest extends TestCase {
 	}
 	
 	public void testReduceSum(){
-		Expression sum = new Sum(Money.dollar(3), Money.dollar(4));
+		Expression sum = new Sum(new Dollar(3), new Dollar(4));
 		Bank bank = new Bank();
 		Money result = bank.reduce(sum, "USD");
-		assertEquals(Money.dollar(7), result);
+		assertEquals(new Dollar(7), result);
 	}
 	
 	public void testReduceMoney(){
 		Bank bank = new Bank();
-		Money result = bank.reduce(Money.dollar(1), "USD");
-		assertEquals(Money.dollar(1), result);
+		Money result = bank.reduce(new Dollar(1), "USD");
+		assertEquals(new Dollar(1), result);
 	}
 	
 	public void testReduceMoneyDifferentCurrency(){
 		Bank bank = new Bank();
 		bank.addRate("CHF", "USD", 2);
-		Money result = bank.reduce(Money.franc(2), "USD");
-		assertEquals(Money.dollar(1), result);
+		Money result = bank.reduce(new Franc(2), "USD");
+		assertEquals(new Dollar(1), result);
 	}
 	
 	public void testIdentityRate(){
@@ -68,31 +68,31 @@ public class MoneyTest extends TestCase {
 	}
 	
 	public void testMixedAddition(){
-		Expression fiveBucks = Money.dollar(5);
-		Expression tenFrancs = Money.franc(10);
+		Expression fiveBucks = new Dollar(5);
+		Expression tenFrancs = new Franc(10);
 		Bank bank = new Bank();
 		bank.addRate("CHF", "USD", 2);
 		Money result = bank.reduce(fiveBucks.plus(tenFrancs), "USD");
-		assertEquals(Money.dollar(10), result);
+		assertEquals(new Dollar(10), result);
 	}
 	
 	public void testSumPlusMoney(){
-		Expression fiveBucks = Money.dollar(5);
-		Expression tenFrancs = Money.franc(10);
+		Expression fiveBucks = new Dollar(5);
+		Expression tenFrancs = new Franc(10);
 		Bank bank = new Bank();
 		bank.addRate("CHF", "USD", 2);
 		Expression sum = new Sum(fiveBucks, tenFrancs).plus(fiveBucks);
 		Money result = bank.reduce(sum, "USD");
-		assertEquals(Money.dollar(15), result);
+		assertEquals(new Dollar(15), result);
 	}
 	
 	public void testSumTimes(){
-		Expression fiveBucks = Money.dollar(5);
-		Expression tenFrancs = Money.franc(10);
+		Expression fiveBucks = new Dollar(5);
+		Expression tenFrancs = new Franc(10);
 		Bank bank = new Bank();
 		bank.addRate("CHF", "USD", 2);
 		Expression sum = new Sum(fiveBucks, tenFrancs).times(2);
 		Money result = bank.reduce(sum, "USD");
-		assertEquals(Money.dollar(20), result);
+		assertEquals(new Dollar(20), result);
 	}
 }

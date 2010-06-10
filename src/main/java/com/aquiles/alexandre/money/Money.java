@@ -1,6 +1,8 @@
 package com.aquiles.alexandre.money;
 
-public class Money implements Expression {
+import com.aquiles.alexandre.money.exception.CurrencyNotSupportedException;
+
+public abstract class Money implements Expression {
 	protected int amount;
 	protected String currency;
 	
@@ -10,27 +12,16 @@ public class Money implements Expression {
 	}
 	
 	@Override
-	public boolean equals(Object object) {
-		Money money = (Money) object;
-		return this.amount == money.amount
-		&& currency().equals(money.currency());
-	}
-
-	@Override
 	public String toString() {
 		return amount + " " + currency;
 	}
 
 	static Money dollar(int amount) {
-		return new Money(amount, "USD");
+		return new Dollar(amount);
 	}
 
 	static Money franc(int amount) {
-		return new Money(amount, "CHF");
-	}
-
-	public Expression times(int multiplier) {
-		return new Money(amount *  multiplier, currency);
+		return new Franc(amount);
 	}
 
 	public String currency() {
@@ -43,7 +34,17 @@ public class Money implements Expression {
 	
 	public Money reduce(Bank bank, String to) {
 		int rate = bank.rate(currency, to);
-		return new Money(amount / rate, to);
+		return createCurrency(to, amount / rate);
 	}
+	
+	public static Money createCurrency(String to, int amount){
+		if(to.equals("CHF"))
+			return new Franc(amount);
+		else if(to.equals("USD"))
+			return new Dollar(amount);
+		else
+			throw new CurrencyNotSupportedException();
 
+	}
+	
 }
