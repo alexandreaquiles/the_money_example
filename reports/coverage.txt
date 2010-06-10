@@ -1,20 +1,21 @@
-[EMMA v2.0.5312 EclEmma Fix 1 report, generated Fri Jun 04 23:20:30 BRT 2010]
+[EMMA v2.0.5312 EclEmma Fix 1 report, generated Wed Jun 09 21:23:09 BRT 2010]
 -------------------------------------------------------------------------------
 OVERALL COVERAGE SUMMARY:
 
 [class, %]	[method, %]	[block, %]	[line, %]	[name]
-100% (4/4)	95%  (19/20)	86%  (237/274)	82%  (47,8/58)	all classes
+86%  (6/7)!	85%  (23/27)	82%  (279/341)	78%  (59,8/77)!	all classes
 
 OVERALL STATS SUMMARY:
 
-total packages:	1
-total classes:	4
-total methods:	20
-total executable files:	3
-total executable lines:	58
+total packages:	2
+total classes:	7
+total methods:	27
+total executable files:	6
+total executable lines:	77
 
 COVERAGE BREAKDOWN BY PACKAGE:
 
 [class, %]	[method, %]	[block, %]	[line, %]	[name]
-100% (4/4)	95%  (19/20)	86%  (237/274)	82%  (47,8/58)	com.aquiles.alexandre.money
+0%   (0/1)!	0%   (0/1)!	0%   (0/4)!	0%   (0/2)!	com.aquiles.alexandre.money.exception
+100% (6/6)	88%  (23/26)	83%  (279/337)	80%  (59,8/75)!	com.aquiles.alexandre.money
 -------------------------------------------------------------------------------
